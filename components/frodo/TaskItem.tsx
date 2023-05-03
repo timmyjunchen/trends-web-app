@@ -8,10 +8,10 @@ type Props = {
   readonly task: TaskWithId
 }
 
-const TaskItem = ({ task: { id, text, checked } }: Props) => {
+const TaskItem = ({ task: { id, text, checked } }: Props) => { //TODO: CHANGE TO POST
   const toggleTask = () => {
     const taskDoc = doc(collection(db, "tasks"), id)
-    updateDoc(taskDoc, { checked: !checked })
+    updateDoc(taskDoc, { checked: !checked })//TODO: change to found: !found ?
   }
 
   const deleteTask = () => {

@@ -10,7 +10,7 @@ export type TaskWithId = Task & { /**TODO: CHANGE TO POST OBJ */
    * itemTitle: string
    * itemDescription: string
    * itemLocation: string
-   * itemImg: img obj?
+   * itemImg: __
    * itemCategory?
    * */
 }

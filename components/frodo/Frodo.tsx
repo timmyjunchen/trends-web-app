@@ -44,9 +44,9 @@ const Frodo = () => {
   }, [])
 
   return (
-    <VStack spacing={4}>
+    <VStack spacing={4} align="stretch">
       <FrodoHeading />
-      <TaskAddControl />
+      <TaskAddControl /> //TODO?: where textboxes are
       {tasks ? <TaskList tasks={tasks} /> : <Spinner />}
     </VStack>
   )

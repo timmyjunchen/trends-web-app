@@ -3,7 +3,7 @@ import Layout from "../components/layout/Layout"
 
 const FrodoPage = () => {
   return (
-    <Layout title="Frodo">
+    <Layout title="Frodo"> //TODO: CHANGE FRODOS
       <Frodo />
     </Layout>
   )
