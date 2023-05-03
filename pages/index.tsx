@@ -4,7 +4,7 @@ import Layout from "../components/layout/Layout"
 const IndexPage = () => (
   <Layout title="Home">
     <Heading my="4">
-      My Trends A4 Project
+      TRENDS LostAndFound Final Project
     </Heading>
     <Text fontSize="md" my="3">
       I am busy so I made an app to keep track of my tasks.
