@@ -14,7 +14,7 @@ const FrodoHeading = () => (
     bgClip="text"
     lineHeight={1.33}
   >
-    Frodo: My Todo List
+    Post an item you found here:
   </Heading>
 )
 
