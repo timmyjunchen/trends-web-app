@@ -14,9 +14,18 @@ const navData: NavLinkData[] = [
     path: "/",
   },
   {
-    name: "Frodo",
+    name: "Lost Something?",
     path: "/frodo",
   },
+  {
+    name: "Found Something?",
+    path: "/frodo",
+  },
+  {
+    name: "Sign in",
+    path: "/sign-in",
+  },
+
 ]
 
 const NavLink = ({ name, path }: NavLinkData) => {
