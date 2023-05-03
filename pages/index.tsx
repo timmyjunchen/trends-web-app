@@ -7,7 +7,7 @@ const IndexPage = () => (
       TRENDS LostAndFound Final Project
     </Heading>
     <Text fontSize="md" my="3">
-      I am busy so I made an app to keep track of my tasks.
+      Nidhi, Sophie, Timmy
     </Text>
     <Text fontSize="md" my="3">
       I worked on this assignment for 2 hours.
