@@ -26,12 +26,12 @@ const TaskItem = ({ task: { id, text, checked } }: Props) => {
         {text}
       </Text>
       <IconButton
-        aria-label="delete task"
+        aria-label="claim item"
         size="xs"
         variant="ghost"
         colorScheme="red"
-        icon={<DeleteIcon />}
-        onClick={deleteTask}
+        icon={<DeleteIcon />} //TODO
+        onClick={deleteTask} //TODO
       />
     </HStack>
   )

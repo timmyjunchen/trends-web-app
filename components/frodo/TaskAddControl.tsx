@@ -7,7 +7,7 @@ import { db } from "../../util/firebase"
 const TaskAddControl = () => {
   const [input, setInput] = useState("")
 
-  const addTask: FormEventHandler<HTMLFormElement> = (e) => {
+  const addPost: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault()
     if (input === "") return
 
@@ -21,15 +21,21 @@ const TaskAddControl = () => {
   }
 
   return (
-    <form onSubmit={addTask}>
+    <form onSubmit={addPost}>
       <HStack shouldWrapChildren>
-        <Input
+        <Input /**item title */
           value={input}
           type="text"
-          placeholder="Do the dishes..."
+          placeholder="Item title*"
           onChange={(e) => setInput(e.target.value)}
         />
-        <Button type="submit">Add Task</Button>
+        <Input /**item description */
+          value={input}
+          type="text"
+          placeholder="Item description* (be as specific as possible)"
+          onChange={(e) => setInput(e.target.value)}
+        />
+        <Button type="submit">Add Post</Button>
       </HStack>
     </form>
   )
