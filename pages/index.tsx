@@ -4,7 +4,7 @@ import Layout from "../components/layout/Layout"
 const IndexPage = () => (
   <Layout title="Home">
     <Heading my="4">
-      TRENDS LostAndFound Final Project
+      TrendsInWebdev LostAndFound Final Project
     </Heading>
     <Text fontSize="md" my="3">
       Nidhi, Sophie, Timmy

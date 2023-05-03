@@ -5,7 +5,7 @@ const Footer = () => (
   <Box as="footer" px={4}>
     <Divider my={4} />
     <Text fontSize="sm" color="subtle">
-      Created by [Timmy Li (tl674)]
+      Created by Nidhi Mylavarapu (nm549), Sophie Wang (szw3), Timmy Li (tl674)
     </Text>
   </Box>
 )
