@@ -37,7 +37,7 @@ const LostItemAddControl = () => {
             <Input /**item title */
               value={titleInput}
               type="text"
-              placeholder="Item title*"
+              placeholder="Item title* EX. LOST Waterbottle"
               onChange={(e) => setTitleInput(e.target.value)}
             />
             <Input /**date */

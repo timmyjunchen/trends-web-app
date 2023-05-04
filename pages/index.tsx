@@ -1,4 +1,5 @@
 import { Heading, Text } from "@chakra-ui/react"
+import Lost from "../components/frodo/Lost"
 import Layout from "../components/layout/Layout"
 
 const IndexPage = () => (
@@ -9,10 +10,13 @@ const IndexPage = () => (
     <Text fontSize="md" my="3">
       Nidhi, Sophie, Timmy
     </Text>
-    <Text fontSize="md" my="3">
-      I worked on this assignment for 2 hours.
+    
+    <Text>
+      Hi
     </Text>
   </Layout>
 )
+
+
 
 export default IndexPage

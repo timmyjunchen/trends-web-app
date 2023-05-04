@@ -5,22 +5,25 @@ import { Task, TaskWithId } from "../../types"
 import TaskAddControl from "./TaskAddControl"
 import TaskList from "./TaskList"
 import { db } from "../../util/firebase"
+import LostItemAddControl from "./LostItemAddControl"
+import LostItemList from "./LostItemList"
+import PostItemList from "./PostItemList"
 
-const FrodoHeading = () => (
+const PostHeading = () => (
   <Heading
     as="h1"
     w="fit-content"
-    bgGradient="linear(to-r, cyan.700, purple.500)"
+    bgGradient="linear(to-r, green.700, blue.500)"
     bgClip="text"
     lineHeight={1.33}
   >
-    Post an item you found here:
+    Before posting, scroll to see if your lost item has been found!
   </Heading>
 )
 
 const taskQuery = query(collection(db, "tasks"))
 
-const Frodo = () => {
+const Lost = () => {
   const [tasks, setTasks] = useState<TaskWithId[] | null>(null)
 
   // Subscribes to `taskQuery`
@@ -45,12 +48,10 @@ const Frodo = () => {
 
   return (
     <VStack spacing={4} align="stretch">
-      <FrodoHeading />
-      <TaskAddControl /> //TODO?: where textboxes are
-      
-      
+      <PostHeading />
+      {tasks ? <PostItemList tasks={tasks} /> : <Spinner />}
     </VStack>
   )
 }
 
-export default Frodo
+export default Lost

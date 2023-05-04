@@ -37,7 +37,7 @@ const TaskAddControl = () => {
             <Input /**item title */
               value={titleInput}
               type="text"
-              placeholder="Item title*"
+              placeholder="Item title* EX. FOUND Waterbottle"
               onChange={(e) => setTitleInput(e.target.value)}
             />
             <Input /**date */
