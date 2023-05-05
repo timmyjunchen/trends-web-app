@@ -10,7 +10,7 @@ const TaskAddControl = () => {
   const [dateInput, setDateInput] = useState("")
   const [locationInput, setLocationInput] = useState("")
   const [descriptionInput, setDescriptionInput] = useState("")
-  const [imgInput, setImgInput] = useState<File | undefined>(undefined)
+  const [imgInput, setImgInput] = useState<File>()
 
   const addPost: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault()
