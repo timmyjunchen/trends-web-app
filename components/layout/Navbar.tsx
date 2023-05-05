@@ -25,10 +25,6 @@ const navData: NavLinkData[] = [
     name: "Posted Items",
     path: "/itemsPosted",
   },
-  {
-    name: "Account",
-    path: "/account",
-  },
 
 ]
 
@@ -63,6 +59,9 @@ const Navbar = () => {
           {navData.map((data) => (
             <NavLink key={data.path} {...data} />
           ))}
+        </HStack>
+        <HStack>
+          <NavLink key={"/account"} {...{ name: "Account", path: "/account" }} />
         </HStack>
       </HStack>
     </Box>
