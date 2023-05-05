@@ -10,7 +10,7 @@ const TaskAddControl = () => {
   const [dateInput, setDateInput] = useState("")
   const [locationInput, setLocationInput] = useState("")
   const [descriptionInput, setDescriptionInput] = useState("")
-  const [imgInput, setImgInput] = useState<File>()
+  const [imgInput, setImgInput] = useState<File | undefined>(undefined)
 
   const addPost: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault()
@@ -21,12 +21,12 @@ const TaskAddControl = () => {
       checked: false,
     }
 
+    setImgInput(undefined) //change? how does actually clear/reset...
     addDoc(collection(db, "tasks"), task)
     setTitleInput("")
     setDateInput("")
     setLocationInput("")
     setDescriptionInput("")
-    setImgInput(undefined) //change? how does actually clear/reset...
   }
 
   return (
@@ -38,7 +38,7 @@ const TaskAddControl = () => {
               value={titleInput}
               type="text"
               placeholder="Item title*"
-              onChange={(e) => setTitleInput(e.target.value)}
+              onChange={(e) => setTitleInput(e.target.value)}//change this so j onsubmit
             />
             <Input /**date */
               value={dateInput}
@@ -66,7 +66,10 @@ const TaskAddControl = () => {
           placeholder="Upload Image Here"
           onChange={(e) => {
             if (e.target.files && e.target.files.length > 0) {
-            setImgInput(e.target.files[0])
+            setImgInput(e.target.files[0])//change through useeffect and add that var as a dependency- keep track of file and when file becomes undefined 
+          }
+          else{
+            setImgInput(undefined)
           }
             
           }} //TODO: change to button + incorporate add img?- files = array of file objs
