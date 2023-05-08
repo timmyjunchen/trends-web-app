@@ -12,6 +12,10 @@ const TaskAddControl = () => {
   const [descriptionInput, setDescriptionInput] = useState("")
   const [imgInput, setImgInput] = useState<File>()
 
+  /** This number represents a signal. Whenever you increment the number, the input element will get refreshed */
+  const [inputKey, setClearInput] = useState(1);
+  const incrClear = () => setClearInput(inputKey+1);
+
   const addPost: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault()
     if (titleInput === "" || dateInput === "" || locationInput === "" || descriptionInput === "" || imgInput === null) return
@@ -27,6 +31,8 @@ const TaskAddControl = () => {
     setDateInput("")
     setLocationInput("")
     setDescriptionInput("")
+
+    incrClear();
   }
 
   return (
@@ -61,17 +67,16 @@ const TaskAddControl = () => {
         </HStack>
         <Input  /**item img */
           // value={imgInput}
+          key={
+            inputKey
+          }
           type="file"
           accept="image/*"
           placeholder="Upload Image Here"
           onChange={(e) => {
             if (e.target.files && e.target.files.length > 0) {
-            setImgInput(e.target.files[0])//change through useeffect and add that var as a dependency- keep track of file and when file becomes undefined 
-          }
-          else{
-            setImgInput(undefined)
-          }
-            
+              setImgInput(e.target.files[0])//change through useeffect and add that var as a dependency- keep track of file and when file becomes undefined 
+            }
           }} //TODO: change to button + incorporate add img?- files = array of file objs
           /> 
         <Button type="submit">Add Post</Button>
