@@ -9,12 +9,16 @@ const LoginAddControl = () => {
   const [usernameInput, setUsernameInput] = useState("")
   const [passwordInput, setPasswordInput] = useState("")
 
+
+  
   const addPost: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault()
     if (usernameInput === "" || passwordInput === "") return
 
-    const task: Task = {
+    const task: Task = { //CHANGE TO ACCOUNT TYPE
       text: usernameInput + passwordInput,
+      lost: false, //TODO: Fix later lol
+      image: null
       checked: false,
     }
 

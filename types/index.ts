@@ -1,5 +1,7 @@
 export type Task = {
   text: string
+  lost: boolean
+  image: File | undefined
   checked: boolean
 }
 

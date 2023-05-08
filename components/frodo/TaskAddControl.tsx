@@ -22,7 +22,9 @@ const TaskAddControl = () => {
 
     const task: Task = {
       text: titleInput,
+      lost: false,
       checked: false,
+      image: imgInput
     }
 
     setImgInput(undefined) //change? how does actually clear/reset...
