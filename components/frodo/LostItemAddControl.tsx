@@ -2,7 +2,8 @@ import { Button, HStack, Input, Textarea, VStack } from "@chakra-ui/react"
 import { FormEventHandler, useState } from "react"
 import { Task } from "../../types"
 import { addDoc, collection} from "firebase/firestore"
-import { db } from "../../util/firebase"
+import { getStorage, uploadBytes, ref, getDownloadURL } from "firebase/storage"
+import { db, storage } from "../../util/firebase"
 import { isEmpty } from "@firebase/util"
 
 const LostItemAddControl = () => {
@@ -21,22 +22,28 @@ const LostItemAddControl = () => {
     e.preventDefault()
     if (titleInput === "" || dateInput === "" || locationInput === "" || descriptionInput === "" || imgInput === null) return
 
-    const task: Task = {
-      text: titleInput,
-      lost: true,
-      image: imgInput,
-      checked: false,
+    const hash = (f : File) => { //generates random id for image
+      return (Math.random).toString();
     }
 
-
-
-    // setImgInput(undefined) //change? how does actually clear/reset...
-    addDoc(collection(db, "tasks"), task)
+    // console.log('before img value')
+    if(imgInput != undefined)
+      {const storageRef = ref(storage, hash(imgInput)); //reference to imgInput
+        // console.log('in set img')
+      uploadBytes(storageRef, imgInput).then(async () => {//img url
+          const taskWithImgUrl: Task = {
+            text: titleInput,
+            lost: false,
+            checked: false,
+            image: hash(imgInput)
+          }
+          // console.log('hashed ' + taskWithImgUrl.image);
+          addDoc(collection(db, "tasks"), taskWithImgUrl);
+        })}
     setTitleInput("")
     setDateInput("")
     setLocationInput("")
     setDescriptionInput("")
-
     incrClear();
   }
 

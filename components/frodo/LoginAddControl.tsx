@@ -18,7 +18,7 @@ const LoginAddControl = () => {
     const task: Task = { //CHANGE TO ACCOUNT TYPE
       text: usernameInput + passwordInput,
       lost: false, //TODO: Fix later lol
-      image: '', //undefinde
+      image: '', //undefined
       checked: false,
     }
 

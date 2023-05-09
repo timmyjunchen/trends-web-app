@@ -25,10 +25,10 @@ const TaskAddControl = () => {
       return (Math.random).toString();
     }
 
-    console.log('before img value')
+    // console.log('before img value')
     if(imgInput != undefined)
       {const storageRef = ref(storage, hash(imgInput)); //reference to imgInput
-        console.log('in set img')
+        // console.log('in set img')
       uploadBytes(storageRef, imgInput).then(async () => {//img url
           const taskWithImgUrl: Task = {
             text: titleInput,
@@ -36,13 +36,11 @@ const TaskAddControl = () => {
             checked: false,
             image: hash(imgInput)
           }
-          console.log('hashed ' + taskWithImgUrl.image);
+          // console.log('hashed ' + taskWithImgUrl.image);
           addDoc(collection(db, "tasks"), taskWithImgUrl);
         })}
 
-    //setImgInput(undefined)
     setImgInput(undefined)
-    // e.target.value = null;
     setTitleInput("")
     setDateInput("")
     setLocationInput("")
