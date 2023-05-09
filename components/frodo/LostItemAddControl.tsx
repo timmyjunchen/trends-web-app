@@ -12,6 +12,7 @@ const LostItemAddControl = () => {
   const [locationInput, setLocationInput] = useState("")
   const [descriptionInput, setDescriptionInput] = useState("")
   const [imgInput, setImgInput] = useState<File>()//need to change?
+  console.log('hash: ' + Math.random())
 
    /** This number represents a signal. Whenever you increment the number, the input element will get refreshed */
    const [inputKey, setClearInput] = useState(1);
@@ -23,7 +24,8 @@ const LostItemAddControl = () => {
     if (titleInput === "" || dateInput === "" || locationInput === "" || descriptionInput === "" || imgInput === null) return
 
     const hash = (f : File) => { //generates random id for image
-      return (Math.random).toString();
+      
+      return (Math.random()).toString();
     }
 
     // console.log('before img value')

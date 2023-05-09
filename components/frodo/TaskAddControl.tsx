@@ -22,7 +22,7 @@ const TaskAddControl = () => {
     if (titleInput === "" || dateInput === "" || locationInput === "" || descriptionInput === "" || imgInput === null) return
     
     const hash = (f : File) => { //generates random id for image
-      return (Math.random).toString();
+      return (Math.random()).toString();
     }
 
     // console.log('before img value')
