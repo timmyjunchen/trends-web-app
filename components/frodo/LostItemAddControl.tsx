@@ -30,7 +30,7 @@ const LostItemAddControl = () => {
 
 
 
-    setImgInput(undefined) //change? how does actually clear/reset...
+    // setImgInput(undefined) //change? how does actually clear/reset...
     addDoc(collection(db, "tasks"), task)
     setTitleInput("")
     setDateInput("")

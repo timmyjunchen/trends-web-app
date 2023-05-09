@@ -11,7 +11,7 @@ const TaskAddControl = () => {
   const [dateInput, setDateInput] = useState("")
   const [locationInput, setLocationInput] = useState("")
   const [descriptionInput, setDescriptionInput] = useState("")
-  const [imgInput, setImgInput] = useState<File>()
+  const [imgInput, setImgInput] = useState<File>() //imgInput = image id
 
   /** This number represents a signal. Whenever you increment the number, the input element will get refreshed */
   const [inputKey, setClearInput] = useState(1);
@@ -20,56 +20,34 @@ const TaskAddControl = () => {
   const addPost: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault()
     if (titleInput === "" || dateInput === "" || locationInput === "" || descriptionInput === "" || imgInput === null) return
-
-
-    // 1. upload to the `storage` object (check the documentation) -- guarantee you that the upload is a promise
-    // and it'll resolve when the promise is done
-    // chain step 2 below in a .then( and then put your code in here )
-
-    /*import { getStorage, ref, uploadBytes } from "firebase/storage";
-
-    const storage = getStorage();
-    const storageRef = ref(storage, 'some-child');
-
-    // 'file' comes from the Blob or File API
-    uploadBytes(storageRef, file).then((snapshot) => {
-      console.log('Uploaded a blob or file!');
-    });*/
     
-    const hash = (f : File | undefined) => {
-      return "uniqueidhere"; //TODO: generate random hash
+    const hash = (f : File) => { //generates random id for image
+      return (Math.random).toString();
     }
 
-    
-    const storageRef = ref(storage, hash(imgInput));
-   
-   
-    
-    uploadBytes(storageRef, storageRef)
-      
-    storage.putFile(storageRef).then(async () => {//img url- hash file into str (string) as id and put hash into firestore db
-        const taskWithImgUrl: Task = {
-          text: titleInput,
-          lost: false,
-          checked: false,
-          image: hash(imgInput) // <-- check the docs to see how to get this
-        }
+    console.log('before img value')
+    if(imgInput != undefined)
+      {const storageRef = ref(storage, hash(imgInput)); //reference to imgInput
+        console.log('in set img')
+      uploadBytes(storageRef, imgInput).then(async () => {//img url
+          const taskWithImgUrl: Task = {
+            text: titleInput,
+            lost: false,
+            checked: false,
+            image: hash(imgInput)
+          }
+          console.log('hashed ' + taskWithImgUrl.image);
+          addDoc(collection(db, "tasks"), taskWithImgUrl);
+        })}
 
-        addDoc(collection(db, "tasks"), taskWithImgUrl);
-      })
-
-    
-    
-    // 2. once that's done, run the code below
-
-
+    //setImgInput(undefined)
     setImgInput(undefined)
+    // e.target.value = null;
     setTitleInput("")
     setDateInput("")
     setLocationInput("")
     setDescriptionInput("")
-
-    incrClear();
+    incrClear();//for resetting 'choose file' input component
   }
 
   return (
@@ -111,7 +89,7 @@ const TaskAddControl = () => {
           placeholder="Upload Image Here"
           onChange={(e) => {
             if (e.target.files && e.target.files.length > 0) {
-              setImgInput(e.target.files[0])//change through useeffect and add that var as a dependency- keep track of file and when file becomes undefined 
+              setImgInput(e.target.files[0])
             }
           }}
           /> 

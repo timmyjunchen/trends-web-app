@@ -14,7 +14,7 @@ const firebaseConfig = {
 
 const app = getApps().length ? getApp() : initializeApp(firebaseConfig)
 
-const storage  = getStorage(app)
+const storage  = getStorage(app) //root reference
 
 const db = getFirestore(app)
 
