@@ -10,7 +10,7 @@ const LostItemAddControl = () => {
   const [dateInput, setDateInput] = useState("")
   const [locationInput, setLocationInput] = useState("")
   const [descriptionInput, setDescriptionInput] = useState("")
-  const [imgInput, setImgInput] = useState([])//need to change?
+  const [imgInput, setImgInput] = useState<File>()//need to change?
 
    /** This number represents a signal. Whenever you increment the number, the input element will get refreshed */
    const [inputKey, setClearInput] = useState(1);

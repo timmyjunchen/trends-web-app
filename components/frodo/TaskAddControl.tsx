@@ -1,8 +1,9 @@
-import { Button, HStack, Input, Textarea, VStack, Image } from "@chakra-ui/react"
+import { Button, HStack, Input, Textarea, VStack } from "@chakra-ui/react"
 import { FormEventHandler, useState } from "react"
 import { Task } from "../../types"
 import { addDoc, collection} from "firebase/firestore"
-import { db } from "../../util/firebase"
+import { getStorage, uploadBytes, ref, getDownloadURL } from "firebase/storage"
+import { db, storage } from "../../util/firebase"
 import { isEmpty } from "@firebase/util"
 
 const TaskAddControl = () => {
@@ -20,15 +21,49 @@ const TaskAddControl = () => {
     e.preventDefault()
     if (titleInput === "" || dateInput === "" || locationInput === "" || descriptionInput === "" || imgInput === null) return
 
-    const task: Task = {
-      text: titleInput,
-      lost: false,
-      checked: false,
-      image: imgInput
+
+    // 1. upload to the `storage` object (check the documentation) -- guarantee you that the upload is a promise
+    // and it'll resolve when the promise is done
+    // chain step 2 below in a .then( and then put your code in here )
+
+    /*import { getStorage, ref, uploadBytes } from "firebase/storage";
+
+    const storage = getStorage();
+    const storageRef = ref(storage, 'some-child');
+
+    // 'file' comes from the Blob or File API
+    uploadBytes(storageRef, file).then((snapshot) => {
+      console.log('Uploaded a blob or file!');
+    });*/
+    
+    const hash = (f : File | undefined) => {
+      return "uniqueidhere"; //TODO: generate random hash
     }
 
-    setImgInput(undefined) //change? how does actually clear/reset...
-    addDoc(collection(db, "tasks"), task)
+    
+    const storageRef = ref(storage, hash(imgInput));
+   
+   
+    
+    uploadBytes(storageRef, storageRef)
+      
+    storage.putFile(storageRef).then(async () => {//img url- hash file into str (string) as id and put hash into firestore db
+        const taskWithImgUrl: Task = {
+          text: titleInput,
+          lost: false,
+          checked: false,
+          image: hash(imgInput) // <-- check the docs to see how to get this
+        }
+
+        addDoc(collection(db, "tasks"), taskWithImgUrl);
+      })
+
+    
+    
+    // 2. once that's done, run the code below
+
+
+    setImgInput(undefined)
     setTitleInput("")
     setDateInput("")
     setLocationInput("")
@@ -46,7 +81,7 @@ const TaskAddControl = () => {
               value={titleInput}
               type="text"
               placeholder="Item title*"
-              onChange={(e) => setTitleInput(e.target.value)}//change this so j onsubmit
+              onChange={(e) => setTitleInput(e.target.value)}
             />
             <Input /**date */
               value={dateInput}
@@ -68,7 +103,6 @@ const TaskAddControl = () => {
           />
         </HStack>
         <Input  /**item img */
-          // value={imgInput}
           key={
             inputKey
           }
@@ -79,7 +113,7 @@ const TaskAddControl = () => {
             if (e.target.files && e.target.files.length > 0) {
               setImgInput(e.target.files[0])//change through useeffect and add that var as a dependency- keep track of file and when file becomes undefined 
             }
-          }} //TODO: change to button + incorporate add img?- files = array of file objs
+          }}
           /> 
         <Button type="submit">Add Post</Button>
       </VStack>
