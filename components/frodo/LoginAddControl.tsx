@@ -37,7 +37,7 @@ const LoginAddControl = () => {
       email: user!.email,
       text: usernameInput + passwordInput,
       lost: false, //TODO: Fix later lol
-      image: null,
+      image: '', //undefined
       checked: false,
     }
 

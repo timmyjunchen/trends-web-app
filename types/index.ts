@@ -1,7 +1,9 @@
+import { StorageReference } from "firebase/storage"
+
 export type Task = {
   text: string
   lost: boolean
-  image: File | undefined
+  image: string // <-- this needs to be a hash
   checked: boolean
 }
 

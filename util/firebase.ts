@@ -7,18 +7,21 @@ import {
   signOut,
 } from "firebase/auth";
 import withFirebaseAuth from "react-with-firebase-auth";
+import { getStorage } from "firebase/storage";
 
 // TODO: Replace with your own Firebase config
 const firebaseConfig = {
-  apiKey: "AIzaSyBrcF_QrpGxeUb9Jlfmrr4lq-MrDZs8oIM",
-  authDomain: "trends-a4-d7c22.firebaseapp.com",
-  projectId: "trends-a4-d7c22",
-  storageBucket: "trends-a4-d7c22.appspot.com",
-  messagingSenderId: "264074739528",
-  appId: "1:264074739528:web:8673f081c2e6d5a37b7d7d"
+  apiKey: "AIzaSyAl3-2hmPKQqkl7B64_hwV6uYgszSx_KZo",
+  authDomain: "trendsfinal-webapp.firebaseapp.com",
+  projectId: "trendsfinal-webapp",
+  storageBucket: "trendsfinal-webapp.appspot.com",
+  messagingSenderId: "752095364924",
+  appId: "1:752095364924:web:c03150567540ce0a99c039"
 };
 
 const app = getApps().length ? getApp() : initializeApp(firebaseConfig)
+
+const storage = getStorage(app) //root reference
 
 const db = getFirestore(app)
 const auth = getAuth(app);
