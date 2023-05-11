@@ -9,15 +9,30 @@ import LostItemAddControl from "./LostItemAddControl"
 import LostItemList from "./LostItemList"
 import LoginAddControl from "./LoginAddControl"
 
-const LostHeading = () => (
+const Title = () => (
   <Heading
     as="h1"
     w="fit-content"
-    bgGradient="linear(to-r, red.700, orange.500)"
+    size="2xl"
+    width="700px"
+    bgGradient="linear(to-r, blue.700, green.500)"
     bgClip="text"
     lineHeight={1.33}
   >
-    Login Page
+    Cornell Lost and Found
+  </Heading>
+)
+
+const LostHeading = () => (
+  <Heading
+    as="h3"
+    w="fit-content"
+    size="xl"
+    bgGradient="linear(to-r, blue.700, green.500)"
+    bgClip="text"
+    lineHeight={1.33}
+  >
+    Login
   </Heading>
 )
 
@@ -47,7 +62,8 @@ const Login = () => {
   }, [])
 
   return (
-    <VStack spacing={4} align="stretch">
+    <VStack spacing={10} align="stretch" maxWidth="100%">
+      <Title />
       <LostHeading />
       <LoginAddControl /> // TODO?: where textboxes are
     </VStack>
