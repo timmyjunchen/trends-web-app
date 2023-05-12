@@ -49,7 +49,6 @@ const Lost = () => {
     <VStack spacing={4} align="stretch">
       <LostHeading />
       <LostItemAddControl /> //TODO?: where textboxes are
-      {tasks ? <LostItemList tasks={tasks} /> : <Spinner />}
     </VStack>
   )
 }

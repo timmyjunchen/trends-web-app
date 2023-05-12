@@ -1,8 +1,10 @@
 import { initializeApp, getApps, getApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 import {
+  createUserWithEmailAndPassword,
   getAuth,
   GoogleAuthProvider,
+  signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
 } from "firebase/auth";
@@ -39,6 +41,16 @@ const signInWithGoogle = () => {
   signInWithPopup(auth, providers.googleProvider);
 };
 
+const createUserWithPassword = (username: string, password: string) => {
+  console.log(username + password)
+  createUserWithEmailAndPassword(auth, username, password)
+}
+
+const signInWithPassword = (username: string, password: string) => {
+  console.log(username + password)
+  signInWithEmailAndPassword(auth, username, password)
+}
+
 const signOutFirebase = () => {
   signOut(auth);
 };
@@ -49,5 +61,7 @@ export {
   auth,
   createComponentWithAuth,
   signInWithGoogle,
+  createUserWithPassword,
+  signInWithPassword,
   signOutFirebase as signOut,
 };

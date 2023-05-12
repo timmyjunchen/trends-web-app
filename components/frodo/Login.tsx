@@ -1,4 +1,4 @@
-import { Heading, Spinner, VStack } from "@chakra-ui/react"
+import { Center, Divider, Heading, HStack, Spinner, VStack } from "@chakra-ui/react"
 import { collection, onSnapshot, query } from "firebase/firestore"
 import { useEffect, useState } from "react"
 import { Task, TaskWithId } from "../../types"
@@ -14,27 +14,17 @@ const Title = () => (
     as="h1"
     w="fit-content"
     size="2xl"
-    width="700px"
+    width="100%"
     bgGradient="linear(to-r, blue.700, green.500)"
     bgClip="text"
     lineHeight={1.33}
   >
-    Cornell Lost and Found
+    <Center>
+      Cornell Lost and Found
+    </Center>
   </Heading>
 )
 
-const LostHeading = () => (
-  <Heading
-    as="h3"
-    w="fit-content"
-    size="xl"
-    bgGradient="linear(to-r, blue.700, green.500)"
-    bgClip="text"
-    lineHeight={1.33}
-  >
-    Login
-  </Heading>
-)
 
 const taskQuery = query(collection(db, "tasks"))
 
@@ -62,10 +52,9 @@ const Login = () => {
   }, [])
 
   return (
-    <VStack spacing={10} align="stretch" maxWidth="100%">
+    <VStack align="stretch" width="100%">
       <Title />
-      <LostHeading />
-      <LoginAddControl /> // TODO?: where textboxes are
+      <LoginAddControl />
     </VStack>
   )
 }

@@ -18,7 +18,7 @@ const Layout = ({ children, title }: Props) => (
       <link rel="icon" href="/lostFound.ico" />
     </Head>
     <Navbar />
-    <Container my={6}>{children}</Container>
+    <Container my={6} maxWidth="1000px" width="100%">{children}</Container>
     <Footer />
   </div>
 )
