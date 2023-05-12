@@ -27,7 +27,7 @@ const LostItemAddControl = () => {
 
     const hash = (f: File) => { //generates random id for image
 
-      return (Math.random()).toString();
+      return f.name;
     }
 
     // console.log('before img value')
