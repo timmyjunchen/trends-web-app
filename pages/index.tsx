@@ -10,10 +10,6 @@ const IndexPage = () => (
     <Text fontSize="md" my="3">
       Nidhi, Sophie, Timmy
     </Text>
-    
-    <Text>
-      Hi
-    </Text>
   </Layout>
 )
 

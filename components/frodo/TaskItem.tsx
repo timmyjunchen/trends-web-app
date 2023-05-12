@@ -1,5 +1,5 @@
-import { DeleteIcon } from "@chakra-ui/icons"
-import { Checkbox, HStack, IconButton, Text, Image } from "@chakra-ui/react"
+import { ChatIcon } from "@chakra-ui/icons"
+import { Checkbox, HStack, IconButton, Text, Image, VStack } from "@chakra-ui/react"
 import { collection, deleteDoc, doc, updateDoc } from "firebase/firestore"
 import { getStorage, ref, getDownloadURL } from "firebase/storage"
 import { TaskWithId } from "../../types"
@@ -39,13 +39,17 @@ const TaskItem = ({ task: { id, text, lost, image, checked } }: Props) => { //TO
       <Text textDecorationLine={checked ? "line-through" : "initial"}>
         {text}
       </Text>
-      <Image src={downloardUrl} />
+      <Image 
+        width = "100" 
+        height = "100" 
+        src={downloardUrl}
+      />
       <IconButton
         aria-label="claim item"
         size="xs"
         variant="ghost"
-        colorScheme="red"
-        icon={<DeleteIcon />} //TODO
+        colorScheme="black"
+        icon={<ChatIcon />} //TODO
         onClick={deleteTask} //TODO
       />
     </HStack>
