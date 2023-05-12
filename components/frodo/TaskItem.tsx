@@ -40,8 +40,8 @@ const TaskItem = ({ task: { id, text, lost, image, checked } }: Props) => { //TO
         {text}
       </Text>
       <Image 
-        width = "100" 
-        height = "100" 
+        width = "150" 
+        height = "150" 
         src={downloardUrl}
       />
       <IconButton
