@@ -45,6 +45,7 @@ const signOutFirebase = () => {
 
 export {
   db,
+  storage,
   auth,
   createComponentWithAuth,
   signInWithGoogle,

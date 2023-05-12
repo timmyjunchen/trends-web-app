@@ -1,10 +1,11 @@
 import { Button, HStack, Input, Textarea, VStack } from "@chakra-ui/react"
 import { FormEventHandler, useState } from "react"
 import { Task } from "../../types"
-import { addDoc, collection} from "firebase/firestore"
+import { addDoc, collection } from "firebase/firestore"
 import { getStorage, uploadBytes, ref, getDownloadURL } from "firebase/storage"
 import { db, storage } from "../../util/firebase"
 import { isEmpty } from "@firebase/util"
+import { useAuth } from "../auth/AuthUserProvider"
 
 const TaskAddControl = () => {
   const [titleInput, setTitleInput] = useState("")
@@ -13,32 +14,36 @@ const TaskAddControl = () => {
   const [descriptionInput, setDescriptionInput] = useState("")
   const [imgInput, setImgInput] = useState<File>() //imgInput = image id
 
+  const { user } = useAuth()
+
   /** This number represents a signal. Whenever you increment the number, the input element will get refreshed */
   const [inputKey, setClearInput] = useState(1);
-  const incrClear = () => setClearInput(inputKey+1);
+  const incrClear = () => setClearInput(inputKey + 1);
 
   const addPost: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault()
     if (titleInput === "" || dateInput === "" || locationInput === "" || descriptionInput === "" || imgInput === null) return
-    
-    const hash = (f : File) => { //generates random id for image
-      return (Math.random()).toString();
+
+    const hash = (f: File) => { //generates random id for image
+      return f.name;
     }
 
     // console.log('before img value')
-    if(imgInput != undefined)
-      {const storageRef = ref(storage, hash(imgInput)); //reference to imgInput
-        // console.log('in set img')
+    if (imgInput != undefined) {
+      const storageRef = ref(storage, hash(imgInput)); //reference to imgInput
+      // console.log('in set img')
       uploadBytes(storageRef, imgInput).then(async () => {//img url
-          const taskWithImgUrl: Task = {
-            text: titleInput,
-            lost: false,
-            checked: false,
-            image: hash(imgInput)
-          }
-          // console.log('hashed ' + taskWithImgUrl.image);
-          addDoc(collection(db, "tasks"), taskWithImgUrl);
-        })}
+        const taskWithImgUrl: Task = {
+          owner: user!.uid,
+          text: titleInput,
+          lost: false,
+          checked: false,
+          image: hash(imgInput)
+        }
+        // console.log('hashed ' + taskWithImgUrl.image);
+        addDoc(collection(db, "tasks"), taskWithImgUrl);
+      })
+    }
 
     setImgInput(undefined)
     setTitleInput("")
@@ -90,7 +95,7 @@ const TaskAddControl = () => {
               setImgInput(e.target.files[0])
             }
           }}
-          /> 
+        />
         <Button type="submit">Add Post</Button>
       </VStack>
     </form>

@@ -1,9 +1,8 @@
 import { Button, HStack, Input, Textarea, VStack, Image } from "@chakra-ui/react"
 import { FormEventHandler, useEffect, useState } from "react"
-import { Task } from "../../types"
+import { Person, Task } from "../../types"
 import { addDoc, collection } from "firebase/firestore"
-import { db, signInWithGoogle } from "../../util/firebase"
-import { isEmpty } from "@firebase/util"
+import { db, signInWithGoogle, signOut } from "../../util/firebase"
 import { FcGoogle } from "react-icons/fc"
 import { useAuth } from "../auth/AuthUserProvider"
 
@@ -18,30 +17,27 @@ const LoginAddControl = () => {
     return user
   }
 
-  let signedIn = false
+  let signedIn = user !== null && user !== undefined
 
-  updateUser()
   useEffect(
     () => {
-      if (user !== null || user !== undefined) {
+      if (user !== null && user !== undefined) {
         signedIn = true
       }
     }, []
   )
 
-  const addPost: FormEventHandler<HTMLFormElement> = (e) => {
+  const addUser: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault()
     if (usernameInput === "" || passwordInput === "") return
 
-    const task: Task = { //CHANGE TO ACCOUNT TYPE
-      email: user!.email,
-      text: usernameInput + passwordInput,
-      lost: false, //TODO: Fix later lol
-      image: '', //undefined
-      checked: false,
+    const person: Person = { //CHANGE TO ACCOUNT TYPE
+      uid: "",
+      username: usernameInput,
+      password: passwordInput,
     }
 
-    addDoc(collection(db, "tasks"), task)
+    addDoc(collection(db, "users"), person)
   }
 
   const signIn = () => {
@@ -66,7 +62,7 @@ const LoginAddControl = () => {
         />
       </VStack>
       <HStack>
-        <form onSubmit={addPost}>
+        <form onSubmit={addUser}>
           <Button type="submit">Login</Button>
         </form>
         <Button type="submit">Forgot Password</Button>
@@ -79,12 +75,15 @@ const LoginAddControl = () => {
     return <h1>
       test
     </h1>
+    // <Button>
+    //   onClick= {signOut()} dwaabd
+    // </Button>
   }
 
   return (
-    <h1>
+    <>
       {signedIn ? profilePage() : signInPage()}
-    </h1>
+    </>
   )
 }
 

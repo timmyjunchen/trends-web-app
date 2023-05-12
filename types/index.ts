@@ -1,10 +1,17 @@
 import { StorageReference } from "firebase/storage"
 
 export type Task = {
+  owner: string
   text: string
   lost: boolean
   image: string // <-- this needs to be a hash
   checked: boolean
+}
+
+export type Person = {
+  uid: string | null
+  username: string | null
+  password: string | null
 }
 
 export type TaskWithId = Task & { /**TODO: CHANGE TO POST OBJ */
