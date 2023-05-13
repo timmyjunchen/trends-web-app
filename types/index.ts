@@ -3,7 +3,7 @@ import { StorageReference } from "firebase/storage"
 export type Task = {
   owner: string
   text: string
-  description: string //just added
+  description: string //just added this parameter
   lost: boolean
   image: string // <-- this needs to be a hsh
   checked: boolean
