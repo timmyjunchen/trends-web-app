@@ -1,14 +1,16 @@
-import { Button, HStack, Input, Textarea, VStack, Image, Divider, Heading } from "@chakra-ui/react"
+import { Button, HStack, Input, Textarea, VStack, Image, Divider, Heading, Spinner } from "@chakra-ui/react"
 import { FormEventHandler, useEffect, useState } from "react"
-import { Person, Task } from "../../types"
-import { addDoc, collection } from "firebase/firestore"
+import { Person, Task, TaskWithId } from "../../types"
+import { addDoc, collection, onSnapshot, query, where } from "firebase/firestore"
 import { db, signInWithGoogle, createUserWithPassword, signInWithPassword, signOut } from "../../util/firebase"
 import { FcGoogle } from "react-icons/fc"
 import { useAuth } from "../auth/AuthUserProvider"
-import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword } from "firebase/auth"
+import LostItemList from "./LostItemList"
+import PostItemList from "./PostItemList"
 
 
 const LoginAddControl = () => {
+
   const [usernameInputLogIn, setUsernameInputLogIn] = useState("")
   const [passwordInputLogIn, setPasswordInputLogIn] = useState("")
   const [usernameInputSignUp, setUsernameInputSignUp] = useState("")
@@ -106,10 +108,54 @@ const LoginAddControl = () => {
     </VStack >
   }
 
+  const taskQuery = user !== undefined && user !== null ? query(
+    collection(db, 'tasks'),
+    where('owner', '==', user!.uid)
+  ) : query(
+    collection(db, 'tasks')
+  )
+
+  const [tasks, setTasks] = useState<TaskWithId[] | null>(null)
+
+  // Subscribes to `taskQuery`
+  // We define a function to run whenever the query result changes
+  useEffect(() => {
+    const unsubscribe = onSnapshot(taskQuery, (querySnapshot) => {
+
+    })
+    return unsubscribe
+  }, [])
+
+  useEffect(() => {
+    const snapshot = onSnapshot(taskQuery, (querySnapshot) => {
+      const snapshotTasks: TaskWithId[] = querySnapshot.docs.map((doc) => {
+        const data = doc.data() as Task
+        return { ...data, id: doc.id }
+      })
+      setTasks(snapshotTasks)
+    })
+    return snapshot
+  }, [])
+
   const profilePage = () => {
-    return <Button onClick={signOut}>
-      Log Out
-    </Button>
+    return <VStack>
+      <Heading
+        as="h3"
+        w="fit-content"
+        size="xl"
+        bgGradient="linear(to-r, blue.700, green.500)"
+        bgClip="text"
+        lineHeight={1.33}
+      >
+        Here are your posts!
+      </Heading>
+      <Button onClick={signOut}>
+        Log Out
+      </Button>
+      <VStack spacing={4} align="stretch">
+        {tasks ? <PostItemList tasks={tasks} /> : <Spinner />}
+      </VStack>
+    </VStack>
   }
 
   return (
