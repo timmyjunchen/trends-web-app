@@ -1,4 +1,4 @@
-import { Button, HStack, Input, Textarea, VStack, Image, Divider, Heading, Spinner } from "@chakra-ui/react"
+import { Button, HStack, Input, Textarea, VStack, Image, Divider, Heading, Spinner, InputGroup, InputRightElement } from "@chakra-ui/react"
 import { FormEventHandler, useEffect, useState } from "react"
 import { Person, Task, TaskWithId } from "../../types"
 import { addDoc, collection, onSnapshot, query, where } from "firebase/firestore"
@@ -15,6 +15,12 @@ const LoginAddControl = () => {
   const [passwordInputLogIn, setPasswordInputLogIn] = useState("")
   const [usernameInputSignUp, setUsernameInputSignUp] = useState("")
   const [passwordInputSignUp, setPasswordInputSignUp] = useState("")
+
+  const [showLogIn, setShowLogIn] = useState(false)
+  const handleClickLogIn = () => setShowLogIn(!showLogIn)
+
+  const [showSignUp, setShowSignUp] = useState(false)
+  const handleClickSignUp = () => setShowSignUp(!showSignUp)
 
   let { user } = useAuth()
 
@@ -69,16 +75,24 @@ const LoginAddControl = () => {
           placeholder="Username"
           onChange={(e) => setUsernameInputSignUp(e.target.value)}
         />
-        <Input /**Password */
-          value={passwordInputSignUp}
-          type="text"
-          placeholder="Password"
-          onChange={(e) => setPasswordInputSignUp(e.target.value)}
-        />
+        <InputGroup size='md'>
+          <Input
+            pr='4.5rem'
+            type={showSignUp ? 'text' : 'password'}
+            placeholder='Enter password'
+            onChange={(e) => setPasswordInputSignUp(e.target.value)}
+          />
+          <InputRightElement width='4.5rem'>
+            <Button h='1.75rem' size='sm' onClick={handleClickSignUp}>
+              {showSignUp ? 'Hide' : 'Show'}
+            </Button>
+          </InputRightElement>
+        </InputGroup>
       </VStack>
       <HStack>
         <Button onClick={signUpPassword}>Sign Up</Button>
-        <Button type="submit">Forgot Password</Button>
+        {//<Button type="submit">Forgot Password</Button>
+        }
       </HStack>
       <Button onClick={signInWithGoogle} variant="outline" leftIcon={<FcGoogle />}>Sign Up With Google</Button>;
     </VStack >
@@ -93,16 +107,24 @@ const LoginAddControl = () => {
           placeholder="Username"
           onChange={(e) => setUsernameInputLogIn(e.target.value)}
         />
-        <Input /**Password */
-          value={passwordInputLogIn}
-          type="text"
-          placeholder="Password"
-          onChange={(e) => setPasswordInputLogIn(e.target.value)}
-        />
+        <InputGroup size='md'>
+          <Input
+            pr='4.5rem'
+            type={showLogIn ? 'text' : 'password'}
+            placeholder='Enter password'
+            onChange={(e) => setPasswordInputLogIn(e.target.value)}
+          />
+          <InputRightElement width='4.5rem'>
+            <Button h='1.75rem' size='sm' onClick={handleClickLogIn}>
+              {showLogIn ? 'Hide' : 'Show'}
+            </Button>
+          </InputRightElement>
+        </InputGroup>
       </VStack>
       <HStack>
         <Button onClick={logInPassword}>Login</Button>
-        <Button type="submit">Forgot Password</Button>
+        {//<Button type="submit">Forgot Password</Button>
+        }
       </HStack>
       <Button onClick={signInWithGoogle} variant="outline" leftIcon={<FcGoogle />}>Log In With Google</Button>;
     </VStack >
