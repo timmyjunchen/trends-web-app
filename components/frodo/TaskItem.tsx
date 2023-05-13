@@ -1,6 +1,6 @@
 import { ChatIcon } from "@chakra-ui/icons"
 import { Checkbox, HStack, IconButton, Text, Image, VStack } from "@chakra-ui/react"
-import { collection, deleteDoc, doc, updateDoc } from "firebase/firestore"
+import { collection, deleteDoc, doc, getDoc, updateDoc } from "firebase/firestore"
 import { getStorage, ref, getDownloadURL } from "firebase/storage"
 import { TaskWithId } from "../../types"
 import { db, storage } from "../../util/firebase"
@@ -20,6 +20,10 @@ const TaskItem = ({ task: { id, text, lost, image, checked } }: Props) => { //TO
   const deleteTask = () => {
     const taskDoc = doc(collection(db, "tasks"), id)
     deleteDoc(taskDoc)
+  }
+
+  const getDescription = () => {
+    const taskDoc = doc(collection(db, "tasks"), id)
   }
 
   const [downloardUrl, setDownloadUrl] = useState("")
@@ -52,6 +56,9 @@ const TaskItem = ({ task: { id, text, lost, image, checked } }: Props) => { //TO
         icon={<ChatIcon />} //TODO
         onClick={deleteTask} //TODO
       />
+      <Text>
+        {}
+      </Text>
     </HStack>
   )
 }
