@@ -11,7 +11,7 @@ type Props = {
   readonly task: TaskWithId
 }
 
-const TaskItem = ({ task: { id, text, lost, image, checked } }: Props) => { //TODO: CHANGE TO POST
+const TaskItem = ({ task: { id, text, description, lost, image, checked } }: Props) => { //TODO: CHANGE TO POST
   const toggleTask = () => {
     const taskDoc = doc(collection(db, "tasks"), id)
     updateDoc(taskDoc, { lost: !lost })//TODO: change to found: !found ?
@@ -57,7 +57,7 @@ const TaskItem = ({ task: { id, text, lost, image, checked } }: Props) => { //TO
         onClick={deleteTask} //TODO
       />
       <Text>
-        {}
+        {description}
       </Text>
     </HStack>
   )

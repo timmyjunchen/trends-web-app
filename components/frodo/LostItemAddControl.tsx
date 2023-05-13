@@ -38,6 +38,7 @@ const LostItemAddControl = () => {
         const taskWithImgUrl: Task = {
           owner: user!.uid,
           text: titleInput,
+          description: descriptionInput,
           lost: false,
           checked: false,
           image: hash(imgInput)
