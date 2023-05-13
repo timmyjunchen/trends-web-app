@@ -39,7 +39,7 @@ const createComponentWithAuth = withFirebaseAuth({
 });
 
 const signInWithGoogle = () => {
-  signInWithRedirect(auth, providers.googleProvider);
+  signInWithPopup(auth, providers.googleProvider);
 };
 
 const createUserWithPassword = (username: string, password: string) => {
