@@ -27,11 +27,15 @@ const LoginAddControl = () => {
   const signUpPassword = () => {
     if (usernameInputSignUp === "" || passwordInputSignUp === "") return;
     createUserWithPassword(usernameInputSignUp, passwordInputSignUp)
+    setUsernameInputSignUp("")
+    setPasswordInputSignUp("")
   }
 
   const logInPassword = () => {
     if (usernameInputLogIn === "" || passwordInputLogIn === "") return;
     signInWithPassword(usernameInputLogIn, passwordInputLogIn)
+    setUsernameInputLogIn("")
+    setPasswordInputLogIn("")
   }
 
   const signInPage = () => {
@@ -72,14 +76,14 @@ const LoginAddControl = () => {
         <Input /**Username */
           value={usernameInputSignUp}
           type="text"
-          placeholder="Username"
+          placeholder="Email"
           onChange={(e) => setUsernameInputSignUp(e.target.value)}
         />
         <InputGroup size='md'>
           <Input
             pr='4.5rem'
             type={showSignUp ? 'text' : 'password'}
-            placeholder='Enter password'
+            placeholder='Password'
             onChange={(e) => setPasswordInputSignUp(e.target.value)}
           />
           <InputRightElement width='4.5rem'>
@@ -104,14 +108,14 @@ const LoginAddControl = () => {
         <Input /**Username */
           value={usernameInputLogIn}
           type="text"
-          placeholder="Username"
+          placeholder="Email"
           onChange={(e) => setUsernameInputLogIn(e.target.value)}
         />
         <InputGroup size='md'>
           <Input
             pr='4.5rem'
             type={showLogIn ? 'text' : 'password'}
-            placeholder='Enter password'
+            placeholder='Password'
             onChange={(e) => setPasswordInputLogIn(e.target.value)}
           />
           <InputRightElement width='4.5rem'>
