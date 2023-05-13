@@ -6,6 +6,7 @@ import {
   GoogleAuthProvider,
   signInWithEmailAndPassword,
   signInWithPopup,
+  signInWithRedirect,
   signOut,
 } from "firebase/auth";
 import withFirebaseAuth from "react-with-firebase-auth";
@@ -38,7 +39,7 @@ const createComponentWithAuth = withFirebaseAuth({
 });
 
 const signInWithGoogle = () => {
-  signInWithPopup(auth, providers.googleProvider);
+  signInWithRedirect(auth, providers.googleProvider);
 };
 
 const createUserWithPassword = (username: string, password: string) => {
